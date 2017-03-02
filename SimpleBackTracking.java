@@ -2,6 +2,7 @@ package SudokuIO;
 
 public class SimpleBackTracking {
 	// int firstUnassigned;
+	int guess=0;
 	int[] solution = new int[81];
 
 	public void BacktrackingSearch() {
@@ -14,6 +15,7 @@ public class SimpleBackTracking {
 			if (i % 9 == 8)
 				System.out.println();
 		}
+		System.out.println(this.guess);
 
 	}
 
@@ -42,6 +44,7 @@ public class SimpleBackTracking {
 			int j = 0;
 			boolean right = false;
 			for (j = 1; j < 10; j++) {
+				this.guess++;
 				assignment[firstUnassigned] = j;
 				if (checkConstraints(firstUnassigned, assignment, j)) {
 					right = true;
@@ -117,7 +120,7 @@ public class SimpleBackTracking {
 			if (assignment[j2] == j && j2 != firstUnassigned)
 				flag = false;
 		}
-		loopColumn: for (int k = column; k < 72 + column && flag; k = k + 9) {
+		loopColumn: for (int k = column; k <= 72 + column && flag; k = k + 9) {
 			if (assignment[k] == j && k != firstUnassigned)
 				flag = false;
 		}
@@ -143,6 +146,11 @@ public class SimpleBackTracking {
 	public static void main(String[] args) {
 		SimpleBackTracking sbt = new SimpleBackTracking();
 		sbt.BacktrackingSearch();
+//		for (int i = 0; i < 81; i++) {
+//			System.out.print(i + " | ");
+//			if (i % 9 == 8)
+//				System.out.println();
+//		}
 		// SudokuIO.makeSudokuPuzzle();
 		// System.out.println( sbt.checkRow(SudokuIO.vars, 0, 4, 4));
 	}
